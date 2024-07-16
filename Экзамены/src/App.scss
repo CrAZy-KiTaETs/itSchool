@@ -1,0 +1,10 @@
+@import "@/styles/globals";
+
+.container {
+    max-width: 425px;
+    margin: auto;
+    outline: 1px solid black;
+    height: 100dvh;
+    background-color: $primary-900;
+    overflow: hidden;
+}

@@ -1,0 +1,21 @@
+@import "@/styles/globals";
+
+.general_money {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .3rem;
+    color: $primary-200;
+    padding: .625rem;
+    padding-bottom: 4rem;
+    background-color: $primary-700;
+    box-shadow: 0px 0px 10px 0px #232323;
+    &-text {
+        font-size: .8rem ;
+    }
+    &-count {
+        font-size: 1.5rem;
+    }
+}
