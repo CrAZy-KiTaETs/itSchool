@@ -1,16 +1,49 @@
-
+<template>
+  <section class="container">
+    <Header />
+    <Expenses
+      v-if="activePage === 'expenses'"
+      @update:active-page="changeActivePage"
+      @changePopupInfo="changePopupInfo"
+    />
+    <Income
+      v-else-if="activePage === 'income'"
+      @update:active-page="changeActivePage"
+    />
+    <Popup
+      v-if="popupInfo.active"
+      :popupInfo="popupInfo"
+      @changePopupInfo="changePopupInfo"
+    />
+  </section>
+</template>
 
 <script>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import Header from "./components/Header/Header.vue";
-import Expenses from "./components/Expenses/Expenses.vue";
+import Expenses from "./components/Page/Expenses";
+import Income from "./components/Page/Income.vue";
+import Popup from "./components/Popup/Popup.vue";
 
 export default {
   setup() {
     const store = useStore();
     const count = computed(() => store.getters.count);
     const historyOfCount = computed(() => store.getters.history);
+
+    const activePage = ref("expenses");
+
+    const popupInfo = ref({ active: false, category: "adasdad", where: 'expenses' });
+
+    const changePopupInfo = (state) => {
+      popupInfo.value = state;
+    };
+
+    const changeActivePage = (newPage) => {
+      activePage.value = newPage;
+    };
+
     const increment = () => {
       store.dispatch("incrementAfterDelay");
     };
@@ -24,11 +57,87 @@ export default {
       store.dispatch("getData");
     };
 
-    return { count, increment, setValue, decrement, historyOfCount, getData };
+    return {
+      count,
+      activePage,
+      changeActivePage,
+      increment,
+      setValue,
+      decrement,
+      historyOfCount,
+      getData,
+      popupInfo,
+      changePopupInfo,
+    };
   },
   components: {
     Header,
     Expenses,
+    Popup,
+    Income,
+  },
+};
+</script>
+
+<style lang="scss">
+@import "./App.scss";
+</style>
+
+
+
+
+
+
+
+<!-- 
+
+<script>
+import { computed } from "vue";
+import { useStore } from "vuex";
+import Header from "./components/Header/Header.vue";
+import Expenses from "./components/Expenses/Expenses.vue";
+import Income from "./components/Income/Income.vue";
+
+export default {
+  setup() {
+    const store = useStore();
+    const count = computed(() => store.getters.count);
+    const historyOfCount = computed(() => store.getters.history);
+    const activePage = computed(() => store.getters.activePage);
+
+    const changeActivePage = (state) => {
+      console.log(state, activePage);
+      store.commit("changePage", state);
+    };
+
+    const increment = () => {
+      store.dispatch("incrementAfterDelay");
+    };
+    const setValue = (value) => {
+      store.commit("setValue", value);
+    };
+    const decrement = () => {
+      store.commit("decrement");
+    };
+    const getData = async () => {
+      store.dispatch("getData");
+    };
+
+    return {
+      count,
+      activePage,
+      changeActivePage,
+      increment,
+      setValue,
+      decrement,
+      historyOfCount,
+      getData,
+    };
+  },
+  components: {
+    Header,
+    Expenses,
+    Income,
   },
 };
 </script>
@@ -37,7 +146,15 @@ export default {
 <template>
   <section class="container">
     <Header />
-    <Expenses />
+
+    <button @click="changeActivePage('sd')">one</button>
+    <button @click="changeActivePage('expenses')">sadas</button>
+
+    <Expenses
+      v-if="activePage == 'expenses'"
+      @update:activePage="changeActivePage"
+    />
+    <Income v-else />
   </section>
 </template>
 
@@ -50,8 +167,6 @@ export default {
 
 
 
-<!-- 11w 11w 11w 11w -->
-<!-- 
 <template>
   <section class="contianer">
     <div class="addWrapper">
@@ -129,4 +244,4 @@ export default {
 .done {
   text-decoration: line-through;
 }
-</style> -->
+</style> --> 
