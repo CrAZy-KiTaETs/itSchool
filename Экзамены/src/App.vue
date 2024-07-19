@@ -9,9 +9,11 @@
     <Income
       v-else-if="activePage === 'income'"
       @update:active-page="changeActivePage"
+      @changePopupInfo="changePopupInfo"
     />
     <Popup
       v-if="popupInfo.active"
+      :class="{ active: popupInfo.active }"
       :popupInfo="popupInfo"
       @changePopupInfo="changePopupInfo"
     />
@@ -34,7 +36,13 @@ export default {
 
     const activePage = ref("expenses");
 
-    const popupInfo = ref({ active: false, category: "adasdad", where: 'expenses' });
+    const popupInfo = ref({
+      active: false,
+      category: "adasdad",
+      where: "expenses",
+      icon: "",
+      color: "",
+    });
 
     const changePopupInfo = (state) => {
       popupInfo.value = state;
@@ -82,12 +90,6 @@ export default {
 <style lang="scss">
 @import "./App.scss";
 </style>
-
-
-
-
-
-
 
 <!-- 
 
@@ -244,4 +246,4 @@ export default {
 .done {
   text-decoration: line-through;
 }
-</style> --> 
+</style> -->

@@ -19,13 +19,13 @@ export default {
     },
     labels: {
       type: Array,
-      required: true
+      required: false
     }
   },
   computed: {
     chartData() {
       return {
-        labels: this.labels,
+        // labels: this.labels,
         datasets: [
           {
             data: this.data,
@@ -38,7 +38,12 @@ export default {
     chartOptions() {
       return {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            enabled: false
+          }
+        }
       }
     }
   }

@@ -15,14 +15,22 @@
     gap: 0.5rem;
   }
 
+  .active .categories {
+    &-name {
+      background-color: red;
+    }
+  }
+
   &-name {
-    font-size: 0.8rem;
+    font-size: 1rem;
+  }
+  &-money {
+    font-size: 1rem;
   }
 
   &-btn {
     width: 50px;
     aspect-ratio: 1/1;
-    // height: 70px;
     padding: 0.5rem;
     border-radius: 50%;
     border: none;
@@ -53,13 +61,21 @@
       top: -100%;
       font-size: 1.1rem;
     }
-    &-expenses {
-      font-size: 1.5rem;
+    &-top {
+      font-size: 1.2rem;
+      color: green;
     }
-    &-income {
-      font-size: 1.5rem;
+    &-bottom {
+      font-size: 0.8rem;
+      color: red;
+    }
+  }
+  #expensesPage {
+    .centred_info-top {
+      color: red;
+    }
+    .centred_info-bottom {
+      color: green;
     }
   }
 }
-
-
